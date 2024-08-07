@@ -15,9 +15,9 @@ export default function Layout() {
   return (
     <>
       <header className="sm:flex sm:justify-between sm:items-center">
-        <div className="flex items-center justify-between py-3">
+        <div className="flex items-center justify-between py-6">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">
+            <h1 className="text-6xl font-title font-bold text-gray-900">
               Daledon Artworks
             </h1>
           </div>
@@ -44,7 +44,9 @@ export default function Layout() {
             </button>
           </div>
         </div>
-        <div className={`${isOpen ? "block" : "hidden"} pb-4 sm:flex sm:pb-0`}>
+        <div
+          className={`${isOpen ? "block" : "hidden"} text-xl pb-4 sm:flex sm:pb-0`}
+        >
           <Link
             to="/"
             className="block px-2 py-1 font-semibold [&.active]:font-bold rounded hover:bg-gray-200"
