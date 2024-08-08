@@ -150,23 +150,25 @@ const Pieces = [
 
 export default function Gallery() {
   return (
-    <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-      {Pieces.map(({ fileName, title, artist }) => (
-        <div
-          key={fileName}
-          className="relative group overflow-hidden rounded-md"
-        >
-          <img
-            className="max-w-full aspect-square object-cover object-center transition-all duration-300 group-hover:brightness-75 group-hover:scale-105"
-            src={`pieces/${fileName}`}
-            alt={title}
-          />
-          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/100 to-transparent px-4 py-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <h3 className="text-white font-bold">{title}</h3>
-            <p className="text-gray-300 font-semibold">{artist}</p>
+    <section className="py-16 lg:py-20">
+      <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        {Pieces.map(({ fileName, title, artist }) => (
+          <div
+            key={fileName}
+            className="relative group overflow-hidden rounded-md"
+          >
+            <img
+              className="max-w-full aspect-square object-cover object-center transition-all duration-300 group-hover:brightness-75 group-hover:scale-105"
+              src={`pieces/${fileName}`}
+              alt={title}
+            />
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/100 to-transparent px-4 py-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <h3 className="text-white font-bold">{title}</h3>
+              <p className="text-gray-300 font-semibold">{artist}</p>
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </section>
   );
 }

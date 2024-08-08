@@ -5,5 +5,5 @@ export const Route = createLazyFileRoute("/writings")({
 });
 
 function Writings() {
-  return <div className="p-2">Hello from Writings!</div>;
+  return <section className="py-16 lg:py-20">Work in progress</section>;
 }
