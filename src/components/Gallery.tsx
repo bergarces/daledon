@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useState } from "react";
 
 const Pieces = [
   {
@@ -149,6 +149,24 @@ const Pieces = [
 ];
 
 export default function Gallery() {
+  const [selectedPiece, setSelectedPiece] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (selectedPiece) {
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === "Escape") {
+          setSelectedPiece(null);
+        }
+      };
+
+      window.addEventListener("keydown", handleKeyDown);
+
+      return () => {
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    }
+  }, [selectedPiece]);
+
   return (
     <section className="py-16 lg:py-20">
       <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
@@ -156,11 +174,13 @@ export default function Gallery() {
           <div
             key={fileName}
             className="relative group overflow-hidden rounded-md"
+            onClick={() => setSelectedPiece(fileName)}
           >
             <img
               className="max-w-full aspect-square object-cover object-center transition-all duration-300 group-hover:brightness-75 group-hover:scale-105"
               src={`pieces/${fileName}`}
               alt={title}
+              loading="lazy"
             />
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/100 to-transparent px-4 py-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <h3 className="text-white font-bold">{title}</h3>
@@ -169,6 +189,22 @@ export default function Gallery() {
           </div>
         ))}
       </div>
+
+      {selectedPiece && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center"
+          onClick={() => setSelectedPiece(null)}
+        >
+          <div className="w-4/5 h-4/5 flex items-center justify-center">
+            <img
+              src={`pieces/${selectedPiece}`}
+              alt="Whatever"
+              className="max-w-full max-h-full object-contain"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
+        </div>
+      )}
     </section>
   );
 }
