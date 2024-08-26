@@ -5,5 +5,5 @@ import { defineConfig } from "vite";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [TanStackRouterVite(), react()],
-  base: "/daledon/",
+  // base: "/daledon/", // Uncomment this line for Github Pages without a custom domain
 });
