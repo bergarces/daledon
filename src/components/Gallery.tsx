@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 
-const Pieces = [
+type Piece = {
+  fileName: string;
+  artist: string;
+  title: string;
+};
+
+const Pieces: Piece[] = [
   {
     fileName: "Henri_Matisse__L'escargot.jpg",
     artist: "Henri Matisse",
@@ -149,7 +155,7 @@ const Pieces = [
 ];
 
 export default function Gallery() {
-  const [selectedPiece, setSelectedPiece] = useState<string | null>(null);
+  const [selectedPiece, setSelectedPiece] = useState<Piece | null>(null);
 
   useEffect(() => {
     if (selectedPiece) {
@@ -170,21 +176,21 @@ export default function Gallery() {
   return (
     <section className="py-16 lg:py-20">
       <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        {Pieces.map(({ fileName, title, artist }) => (
+        {Pieces.map((piece) => (
           <div
-            key={fileName}
+            key={piece.fileName}
             className="relative group overflow-hidden rounded-md"
-            onClick={() => setSelectedPiece(fileName)}
+            onClick={() => setSelectedPiece(piece)}
           >
             <img
               className="max-w-full aspect-square object-cover object-center transition-all duration-300 group-hover:brightness-75 group-hover:scale-105"
-              src={`pieces/${fileName}`}
-              alt={title}
+              src={`pieces/${piece.fileName}`}
+              alt={piece.title}
               loading="lazy"
             />
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/100 to-transparent px-4 py-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <h3 className="text-white font-bold">{title}</h3>
-              <p className="text-gray-300 font-semibold">{artist}</p>
+              <h3 className="text-white font-bold">{piece.title}</h3>
+              <p className="text-gray-300 font-semibold">{piece.artist}</p>
             </div>
           </div>
         ))}
@@ -197,8 +203,9 @@ export default function Gallery() {
         >
           <div className="w-4/5 h-4/5 flex items-center justify-center">
             <img
-              src={`pieces/${selectedPiece}`}
-              alt="Whatever"
+              loading="lazy"
+              src={`pieces/${selectedPiece.fileName}`}
+              alt={`${selectedPiece.title} - ${selectedPiece.artist}`}
               className="max-w-full max-h-full object-contain"
               onClick={(e) => e.stopPropagation()}
             />
