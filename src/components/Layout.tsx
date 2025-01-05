@@ -69,7 +69,10 @@ export default function Layout() {
       </header>
       <Outlet />
       <footer className="py-6 text-center text-gray-500">
-        <p>&copy; 2024 Daledon Artworks. All rights reserved.</p>
+        <p>
+          &copy; {new Date().getFullYear()} Daledon Artworks. All rights
+          reserved.
+        </p>
       </footer>
       <React.Suspense>
         <TanStackRouterDevtools />
